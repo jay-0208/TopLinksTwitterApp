@@ -17,28 +17,27 @@ def home(request):
 
 session={}
 def apx(request):
-    if request.method == "POST" :
-        try:
-            auth = OAuthHandler(ak, aks,'https://topapplinkstwitter.herokuapp.com/oauth/complete/twitter')
-            redirect_url = auth.get_authorization_url()
-            session['request_token'] = auth.request_token
-            #print(redirect_url)
-            return redirect(redirect_url)
-        except:
-            return render(request, 'invalid.html', {})
+    auth = OAuthHandler(ak, aks,'https://topapplinkstwitter.herokuapp.com/oauth/complete/twitter')
+    redirect_url = auth.get_authorization_url()
+    session['request_token'] = auth.request_token
+    #print(redirect_url)
+    return redirect(redirect_url)
 
 
 
 def login1(request):
     try:
-        request_token = session['request_token']
-        auth = OAuthHandler(ak, aks, 'https://topapplinkstwitter.herokuapp.com/oauth/complete/twitter')
-        auth.request_token = request_token
+        request_token1 = session['request_token']
+        del session['request_token']
+
+        auth = OAuthHandler(ak, aks)
+        auth.request_token = request_token1
+
         verifier = request.GET.get('oauth_verifier')
         auth.get_access_token(verifier)
-        key,secret = (auth.access_token, auth.access_token_secret)
+        key,secret = auth.access_token, auth.access_token_secret
         auth.set_access_token(key, secret)
-        twitter_client = API(auth)
+        twitter_client = API(auth, wait_on_rate_limit=True)
 
         tweets_id = []
         tweets_user = {}
