@@ -43,7 +43,7 @@ So you can easily access [here](http://jay0208.pythonanywhere.com/).
 
 ## Approach
 
-- First, when the landing page of the website renders, the user can easily login with use of **Login with Twitter** Button
+- First, when the landing page of the website renders, the user can easily login with use of **Login with Twitter** Button. If the User dont have an account the below button will direct user to sign up Page
  >![](https://i.ibb.co/dgQ0wry/frontpage.jpg)
 
 - Now, The user is redirected to Twitter to complete the authentication
