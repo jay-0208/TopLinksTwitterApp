@@ -19,7 +19,7 @@ session={}
 def apx(request):
     if request.method == "POST" :
         try:
-            auth = OAuthHandler(ak, aks,'http://localhost:8000/oauth/complete/twitter')
+            auth = OAuthHandler(ak, aks,'https://topapplinkstwitter.herokuapp.com/oauth/complete/twitter')
             redirect_url = auth.get_authorization_url()
             session['request_token'] = auth.request_token
             print(redirect_url)
