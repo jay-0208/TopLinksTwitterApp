@@ -22,7 +22,7 @@ def apx(request):
             auth = OAuthHandler(ak, aks,'https://topapplinkstwitter.herokuapp.com/oauth/complete/twitter')
             redirect_url = auth.get_authorization_url()
             session['request_token'] = auth.request_token
-            print(redirect_url)
+            #print(redirect_url)
             return redirect(redirect_url)
         except:
             return render(request, 'invalid.html', {})
@@ -137,5 +137,6 @@ def login1(request):
 
 
 
-    except:
+    except Exception as e :
+        print(e)
         return render(request,'invalid.html',{})
