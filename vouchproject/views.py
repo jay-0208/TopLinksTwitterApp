@@ -32,7 +32,7 @@ def apx(request):
 def login1(request):
     try:
         request_token = session['request_token']
-        auth = OAuthHandler(ak, aks, 'http://localhost:8000/oauth/complete/twitter')
+        auth = OAuthHandler(ak, aks, 'https://topapplinkstwitter.herokuapp.com/oauth/complete/twitter')
         auth.request_token = request_token
         verifier = request.GET.get('oauth_verifier')
         auth.get_access_token(verifier)
@@ -102,7 +102,7 @@ def login1(request):
         if len(top_active_users) == 0: top_active_users.append(['-', '-'])
         if len(top_url_counts) == 0: top_url_counts.append(['-', '-'])
 
-        print(tweets_url_count, tweets_id, tweets_user)
+        #print(tweets_url_count, tweets_id, tweets_user)
 
         x = []
 
