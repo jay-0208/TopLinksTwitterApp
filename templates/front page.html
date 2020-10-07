@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>My Example</title>
+
+<!-- CSS -->
+<style>
+    html, body
+    {
+        height: 100%;
+    }
+
+    html
+    {
+        display: table;
+        margin: auto;
+    }
+
+    body
+    {
+
+        display: table-cell;
+        vertical-align: middle;
+        background : url('https://help.twitter.com/content/dam/help-twitter/logos/card_wide_blue.png') no-repeat center center fixed;
+
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+    }
+    .myForm
+    {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+        font-size: 0.8em;
+        width: 80em;
+        margin-top: 12em;
+    }
+
+
+    .myForm button
+    {
+        background-image: url('https://img.icons8.com/fluent/38/000000/twitter.png');
+        background-repeat: no-repeat;
+        background-position: 0px 0px;
+        border: none;
+        cursor: pointer;
+        height: 40px;
+        padding-left: 40px;
+        vertical-align: middle;
+
+        border-radius: 0.5em;
+        border: none;
+        font-weight: bold;
+        margin-left: 40%;
+        margin-top: 1.8em;
+    }
+
+    .myForm button:hover
+    {
+        background-image: url('https://img.icons8.com/android/37/000000/twitter.png');
+        cursor: pointer;
+    }
+</style>
+
+</head>
+<body>
+
+    <form class="myForm" method="post"  action="{% url 'apx' %}"  > {% csrf_token %}
+
+        <p><button>Log in with Twitter</button></p>
+
+    </form>
+    <p><span style="font-weight: bold; margin-left: 40%; ">Dont have an account? Create <a href="https://twitter.com/i/flow/signup">here.</a></span> </p>
+
+
+</body>
+</html>

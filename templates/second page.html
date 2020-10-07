@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Twitter</title>
+    {% load static %}
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style type="text/css">
+		body{background-color: #b7e9f7;}
+			.main
+			{
+			  background: #d3d3d5;
+			  margin-bottom: 10px;
+			}
+			.side
+			{
+			  background: #50a0fe;
+			}
+			.main,
+			.side
+			{
+			  padding: 2%;
+			  border-radius: 10px
+			}
+
+			@media ( min-width : 600px )
+			{
+				.flexbox
+				{
+			    display: -webkit-flex;
+			    display: flex;
+				}
+			  .main
+			  {
+			    margin: 0 10px 0 0;
+			  }
+			}
+
+			.header
+			{
+				text-align: center;
+			}
+			.top
+			{
+				background: gray;
+			}
+    table
+    {
+        table-layout: fixed;
+        padding: 0% 5% 8% 5%;
+        border-collapse:separate;
+        border-radius:6px;
+        -moz-border-radius:6px;
+    }
+    td,th
+    {
+      padding: 8px;
+    }
+
+
+    tr:nth-child(even){background-color: #f2f2f2;}
+    tr:nth-child(odd){background-color: #c9e8f5;}
+    tr:hover {background-color: #ddd;}
+    th
+    {
+      border-top:none;
+      text-align: left;
+      background-color: #4c91af;
+      color: white;
+    }
+    td
+    {
+        overflow: hidden;
+
+    }
+
+    .aa:link
+    {
+      color: red;
+    }
+
+    .aa:hover
+    {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .aa:active
+    {
+      color: blue;
+    }
+    .column
+    {
+      border-radius: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 95%;
+      height: 209px;
+    }
+
+
+    .row:after
+    {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+
+    @media screen and (max-width: 600px)
+    {
+      .column
+      {
+        width: 100%;
+      }
+    }
+
+	</style>
+
+</head>
+<body>
+
+	<div class="jumbotron">
+		<h1 class="display-3 header"> TWITTER </h1>
+		    <p class="lead header"> All The Recent Tweets from last 7 days which contains URLs </p>
+		<p class="lead">
+        <a class="btn btn-outline-info" href="#" role="button" onclick=" window.location.href='/'; ">Sign off</a>
+        </p>
+		
+	</div>
+	
+<div class="row">
+  <div class="column" style="background-color:#abacae;">
+      <br>
+    <table style="width:45%;  float: left;">
+    <tr>
+    <th>Username</th>
+    <th>Count of URLs shared</th>
+    </tr>
+    {% for j,k in topuser %}
+    <tr>
+      <td>{{ k }}</td>
+      <td>{{ j }}</td>
+    </tr>
+    {% endfor %}
+
+    </table>
+    <table style="width:45%; float: left; ">
+    <tr>
+    <th>Url's Shared</th>
+    <th>Count</th>
+    </tr>
+    {% for j,k in urlcount %}
+    <tr onclick="window.location='{{ k }}'" class="aa" target="_blank">
+      <td style="color: blue;">{{ k }}</td>
+      <td>{{ j }}</td>
+    </tr>
+    {% endfor %}
+
+    </table>
+
+
+
+    {% for tweet in embedlink %}
+        <div class="mdl-card__media">
+            {% autoescape off %}{{  tweet }}{% endautoescape %}
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+
+</body>
+</html>
