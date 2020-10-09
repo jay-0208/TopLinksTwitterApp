@@ -16,12 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from vouchproject import views
-from django.contrib.auth.views import LogoutView,LoginView
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('oauth/',LoginView.as_view(),name='login'),
     path('',views.home),
     path('apx/',views.apx,name='apx'),
     path('oauth/complete/twitter/',views.login1,name='main'),

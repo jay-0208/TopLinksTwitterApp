@@ -1,5 +1,7 @@
+ak = ''                    #consumer_key
+aks = ''                   #consumer_secret_key
+
 from django.shortcuts import render,redirect
-from django.http import HttpResponseRedirect
 import tweepy
 import requests
 import json
@@ -7,8 +9,7 @@ from tweepy import API
 from tweepy import OAuthHandler
 from datetime import datetime,timedelta
 
-ak = 'eQgwEw5Q6QuMnt8P5o19lk63w'
-aks = 'AkbnUZb7Xprd03kI0aG3F4klrHHCoteSOn3ERYZeClvehlnhPZ'
+
 
 
 
@@ -17,10 +18,9 @@ def home(request):
 
 session={}
 def apx(request):
-    auth = OAuthHandler(ak, aks,'https://topapplinkstwitter.herokuapp.com/oauth/complete/twitter')
+    auth = tweepy.OAuthHandler(ak, aks,'http://localhost:8000/oauth/complete/twitter')
     redirect_url = auth.get_authorization_url()
     session['request_token'] = auth.request_token
-    #print(redirect_url)
     return redirect(redirect_url)
 
 
@@ -34,6 +34,7 @@ def login1(request):
         auth.request_token = request_token1
 
         verifier = request.GET.get('oauth_verifier')
+        if verifier is None: return render(request,'invalid.html',{})
         auth.get_access_token(verifier)
         key,secret = auth.access_token, auth.access_token_secret
         auth.set_access_token(key, secret)
@@ -101,30 +102,16 @@ def login1(request):
         if len(top_active_users) == 0: top_active_users.append(['-', '-'])
         if len(top_url_counts) == 0: top_url_counts.append(['-', '-'])
 
-        #print(tweets_url_count, tweets_id, tweets_user)
 
         x = []
 
         #Modifying tweet embed link as a string
 
-        s = ' class="twitter-tweet tw-align-center"'
+        s = ' tw-align-center'
         for i in range(len(embed_links)):
-            embed_links[i] = embed_links[i][:len(embed_links[i]) - 10]
-
-            if i != 0: x.append('</script>')
-            else:      x.append('')
-
-            embed_links[i] = embed_links[i][:11] + s + embed_links[i][11:]
-            embed_links[i].replace('\n', '')
-
-            j = 0
-
-            while (j < (len(embed_links[i]) - 1)):
-                if ord(embed_links[i][j]) == 92 and embed_links[i][j + 1] == 'n': j += 2
-                elif ord(embed_links[i][j]) == 10: j += 1
-                else:
-                    x[-1] += embed_links[i][j]
-                    j += 1
+            embed_links[i] = embed_links[i][:len(embed_links[i]) - 86]
+            embed_links[i] = embed_links[i][:32] + s + embed_links[i][32:]
+            x.append(embed_links[i])
 
 
         finaldict = {}
